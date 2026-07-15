@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RotarySafe — Offline TOTP Authenticator</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #f9f9f9;
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+        
+        header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        
+        header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            color: #1a1a1a;
+        }
+        
+        header .tagline {
+            font-size: 1.2em;
+            color: #666;
+            margin-bottom: 30px;
+        }
+        
+        .cta-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-bottom: 50px;
+        }
+        
+        .cta-buttons a {
+            display: inline-block;
+            padding: 12px 28px;
+            font-size: 1em;
+            border-radius: 6px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary {
+            background: #1f8f4e;
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: #0d652d;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(31, 143, 78, 0.3);
+        }
+        
+        .btn-secondary {
+            background: white;
+            color: #1f8f4e;
+            border: 2px solid #1f8f4e;
+        }
+        
+        .btn-secondary:hover {
+            background: #f0f0f0;
+        }
+        
+        .section {
+            background: white;
+            padding: 40px;
+            margin-bottom: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        
+        .section h2 {
+            font-size: 1.8em;
+            margin-bottom: 20px;
+            color: #1a1a1a;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e0e0e0;
+        }
+        
+        .section h3 {
+            font-size: 1.3em;
+            margin-top: 25px;
+            margin-bottom: 12px;
+            color: #1f8f4e;
+        }
+        
+        .section ul, .section p {
+            margin-bottom: 15px;
+            color: #555;
+            line-height: 1.8;
+        }
+        
+        .section li {
+            margin-left: 20px;
+            margin-bottom: 8px;
+        }
+        
+        .highlight {
+            background: #f0fdf4;
+            padding: 20px;
+            border-left: 4px solid #1f8f4e;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+        
+        .highlight strong {
+            color: #0d652d;
+        }
+        
+        .pricing {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .pricing-card {
+            padding: 20px;
+            background: #f9f9f9;
+            border-radius: 6px;
+            border: 1px solid #e0e0e0;
+        }
+        
+        .pricing-card h4 {
+            color: #1f8f4e;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+        
+        footer {
+            text-align: center;
+            padding: 30px 20px;
+            color: #999;
+            font-size: 0.9em;
+            border-top: 1px solid #e0e0e0;
+            margin-top: 50px;
+        }
+        
+        @media (max-width: 600px) {
+            header h1 {
+                font-size: 1.8em;
+            }
+            
+            .section {
+                padding: 25px;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+            }
+            
+            .cta-buttons a {
+                width: 100%;
+                text-align: center;
+            }
+            
+            .pricing {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>RotarySafe</h1>
+            <div class="tagline">Turn your watch bezel to unlock your 2FA codes.</div>
+            <div class="cta-buttons">
+                <a href="https://play.google.com/store/apps/details?id=com.luly.rotarysafe&hl=en-US" class="cta-buttons a btn-primary">Get on Google Play</a>
+                <a href="https://www.youtube.com/watch?v=iwXy2whtomc" class="cta-buttons a btn-secondary">Watch Demo</a>
+            </div>
+        </header>
+
+        <section class="section">
+            <h2>What is RotarySafe?</h2>
+            <p>RotarySafe is a two-factor authentication manager for Android and Wear OS that stores every secret on your devices and unlocks TOTP codes with a physical rotary combination — no server, no cloud sync, no copy of your secrets sitting somewhere you didn't choose.</p>
+        </section>
+
+        <section class="section">
+            <h2>How It Works</h2>
+            <p>Set a rotary combination on your Wear OS watch crown — like a miniature combination safe on your wrist. You can switch between bezel or crown view to customize as needed. When you need a 2FA code, enter your combination by turning the bezel or crown. RotarySafe verifies it and displays the live TOTP code directly on your watch face. Nothing leaves your devices.</p>
+        </section>
+
+        <section class="section">
+            <h2>Security Architecture</h2>
+            
+            <h3>Zero Network Access</h3>
+            <p>RotarySafe holds no INTERNET permission and makes zero network requests. A server breach cannot expose your secrets, because there is no server.</p>
+            
+            <h3>Encrypted Storage</h3>
+            <ul>
+                <li>All TOTP secrets are stored in Android EncryptedSharedPreferences, backed by the Android Keystore and hardware-bound where your device supports it.</li>
+                <li>Your rotary combination is stored only as a PBKDF2-HMAC-SHA256 hash (100,000 iterations, 16-byte random salt per setup). The raw combination is never stored or logged.</li>
+            </ul>
+            
+            <h3>Secure Communication</h3>
+            <ul>
+                <li>Every phone-to-watch message is encrypted with AES-256-GCM using a fresh random IV.</li>
+                <li>The session key is established via ephemeral ECDH (NIST P-256) on every pairing — no long-term shared secret to steal.</li>
+                <li>After three failed combination attempts, the app hard-locks and requires biometric authentication on the phone to clear.</li>
+            </ul>
+            
+            <h3>Backup Security</h3>
+            <p>Encrypted backups use Argon2id for key derivation. Keep your backup in a secure location, such as your private cloud storage. You'll need it to restore your accounts on a new device.</p>
+            
+            <div class="highlight">
+                <strong>Why this matters:</strong> No server-side component means no supply-chain attack vector against your secrets. The physical combination adds an authentication factor independent of your biometrics and your phone's screen lock.
+            </div>
+        </section>
+
+        <section class="section">
+            <h2>Compatibility</h2>
+            <p><strong>Wear OS Required:</strong> RotarySafe requires a paired Wear OS watch. The watch provides the rotary combination interface and displays TOTP codes directly on the wrist.</p>
+            <p><strong>Standard TOTP Support (RFC 6238):</strong> Works with Google, GitHub, AWS, Microsoft, and any service that provides a standard authenticator QR code. Import by scanning the issuer QR code with the phone app.</p>
+        </section>
+
+        <section class="section">
+            <h2>Pricing</h2>
+            <div class="pricing">
+                <div class="pricing-card">
+                    <h4>Free Tier</h4>
+                    <p>2 TOTP accounts with full functionality</p>
+                    <p><strong>No ads, no tracking, no cloud sync.</strong></p>
+                </div>
+                <div class="pricing-card">
+                    <h4>Premium</h4>
+                    <p>Unlock unlimited accounts for a one-time payment (~3 CHF)</p>
+                    <p><strong>All encryption happens locally on your device.</strong></p>
+                </div>
+            </div>
+        </section>
+
+        <footer>
+            <p>RotarySafe by WearableDevDesign | Last updated July 2026</p>
+            <p><a href="https://play.google.com/store/apps/details?id=com.luly.rotarysafe&hl=en-US" style="color: #1f8f4e; text-decoration: none;">Google Play</a> · <a href="https://www.youtube.com/watch?v=iwXy2whtomc" style="color: #1f8f4e; text-decoration: none;">YouTube</a></p>
+        </footer>
+    </div>
+</body>
+</html>
